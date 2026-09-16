@@ -141,7 +141,7 @@ class AITogglePlugin(Star):
         if is_status:
             state = await self._get_state(group_id)
             yield event.plain_result(
-                f"本群 AI 对话当前状态：{'开启' if state else '关闭'}"
+                f"对话状态：{'开启' if state else '关闭'}"
             )
             event.stop_event()
             return
@@ -157,7 +157,7 @@ class AITogglePlugin(Star):
 
         if self.config.get("reply_on_toggle", True):
             yield event.plain_result(
-                "已开启本群 AI 对话喵~" if is_enable else "已关闭本群 AI 对话喵~"
+                "已开启对话喵~" if is_enable else "已关闭对话喵~"
             )
 
     # ------------------------------------------------------------------

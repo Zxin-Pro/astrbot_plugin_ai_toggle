@@ -1,5 +1,5 @@
 name: astrbot_plugin_ai_toggle
 desc: 在群聊中监听管理员消息，通过「开启对话 / 关闭对话 / 对话状态」文本指令按群开关机器人的 AI 回复能力。非管理员发送指令将被静默忽略。
-version: v1.0.0
+version: v1.0.1
 author: Zxin-Pro
 repo: https://github.com/Zxin-Pro/astrbot_plugin_ai_toggle
