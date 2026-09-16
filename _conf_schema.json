@@ -1,0 +1,18 @@
+{
+    "admin_ids": {
+        "description": "允许触发开关指令的管理员用户 ID 列表（留空则回退到 AstrBot 全局管理员配置 WebUI 配置 → 其他配置 → 管理员 ID）",
+        "type": "list",
+        "items": "string",
+        "default": []
+    },
+    "default_enabled": {
+        "description": "新群（无存储记录时）的默认 AI 开关状态",
+        "type": "bool",
+        "default": true
+    },
+    "reply_on_toggle": {
+        "description": "开关切换后是否发送确认消息（AI状态 查询始终会回复）",
+        "type": "bool",
+        "default": true
+    }
+}
