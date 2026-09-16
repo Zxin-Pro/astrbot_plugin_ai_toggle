@@ -2,7 +2,7 @@
 """
 astrbot_plugin_ai_toggle
 
-在群聊中通过文本指令「开启AI / 关闭AI / AI状态」按群控制机器人的 AI 回复能力。
+在群聊中通过文本指令「开启对话 / 关闭对话 / 对话状态」按群控制机器人的 AI 回复能力。
 
 - 仅 AstrBot 管理员（插件配置 admin_ids 或 AstrBot 全局 admins_id）可操作
 - 非管理员发送指令文本时静默忽略，不回复任何内容
@@ -19,9 +19,9 @@ from astrbot.api.provider import ProviderRequest
 from astrbot.api.star import Context, Star
 
 # 指令匹配：兼容大小写、容忍首尾及指令内部空格
-_CMD_ENABLE = re.compile(r"^开\s*启\s*ai$", re.IGNORECASE)
-_CMD_DISABLE = re.compile(r"^关\s*闭\s*ai$", re.IGNORECASE)
-_CMD_STATUS = re.compile(r"^ai\s*状\s*态$", re.IGNORECASE)
+_CMD_ENABLE = re.compile(r"^开\s*启\s*对\s*话$", re.IGNORECASE)
+_CMD_DISABLE = re.compile(r"^关\s*闭\s*对\s*话$", re.IGNORECASE)
+_CMD_STATUS = re.compile(r"^对\s*话\s*状\s*态$", re.IGNORECASE)
 
 KV_KEY_FMT = "group_{group_id}_ai_enabled"
 
@@ -113,7 +113,7 @@ class AITogglePlugin(Star):
         """监听所有消息，匹配管理员发送的开关指令文本。
 
         注意：不使用 @filter.command（斜杠指令），而是纯文本匹配，
-        直接发送「开启AI」等文本即可触发。
+        直接发送「开启对话」等文本即可触发。
         """
         # 私聊 / 群 ID 为空时不处理
         group_id = self._normalize_group_id(event)
@@ -141,7 +141,7 @@ class AITogglePlugin(Star):
         if is_status:
             state = await self._get_state(group_id)
             yield event.plain_result(
-                f"本群 AI 回复当前状态：{'开启' if state else '关闭'}"
+                f"本群 AI 对话当前状态：{'开启' if state else '关闭'}"
             )
             event.stop_event()
             return
@@ -152,12 +152,12 @@ class AITogglePlugin(Star):
             f"（操作人: {event.get_sender_id()}）"
         )
 
-        # 终止事件继续传播，避免「开启AI」这段文本再被当作普通消息送入 LLM
+        # 终止事件继续传播，避免「开启对话」这段文本再被当作普通消息送入 LLM
         event.stop_event()
 
         if self.config.get("reply_on_toggle", True):
             yield event.plain_result(
-                "已开启本群 AI 回复喵~" if is_enable else "已关闭本群 AI 回复喵~"
+                "已开启本群 AI 对话喵~" if is_enable else "已关闭本群 AI 对话喵~"
             )
 
     # ------------------------------------------------------------------

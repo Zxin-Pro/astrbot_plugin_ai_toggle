@@ -11,7 +11,7 @@
         "default": true
     },
     "reply_on_toggle": {
-        "description": "开关切换后是否发送确认消息（AI状态 查询始终会回复）",
+        "description": "开关切换后是否发送确认消息（对话状态 查询始终会回复）",
         "type": "bool",
         "default": true
     }
